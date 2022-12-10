@@ -1,10 +1,10 @@
 -- Made by DylanIsAKing#2402
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "Find The DOORS Morphs GUI", HidePremium = false, IntroText = "Find The DOORS Morphs GUI", SaveConfig = true, ConfigFolder = "FTDMGUI"})
 local Speed = game.Players.LocalPlayer.Character.Humanoid
 
 if game.PlaceId == 11242465380 then
+        local Window = OrionLib:MakeWindow({Name = "Find The DOORS Morphs GUI", HidePremium = false, IntroText = "Find The DOORS Morphs GUI", SaveConfig = true, ConfigFolder = "FTDMGUI"})
 	local Tab = Window:MakeTab({
 		Name = "Cheats",
 		Icon = "rbxassetid://4483345998",
