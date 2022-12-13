@@ -1,20 +1,22 @@
+-- Updated to tp to exact locations using CFrames
+
 -- Made by DylanIsAKing#2402
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Speed = game.Players.LocalPlayer.Character.Humanoid
 
 if game.PlaceId == 11242465380 then
-        local Window = OrionLib:MakeWindow({Name = "Find The DOORS Morphs GUI", HidePremium = false, IntroText = "Find The DOORS Morphs GUI", SaveConfig = true, ConfigFolder = "FTDMGUI"})
+	local Window = OrionLib:MakeWindow({Name = "Find The DOORS Morphs GUI", HidePremium = false, IntroText = "Find The DOORS Morphs GUI", SaveConfig = true, ConfigFolder = "FTDMGUI"})
 	local Tab = Window:MakeTab({
 		Name = "Cheats",
 		Icon = "rbxassetid://4483345998",
 		PremiumOnly = false
 	})
-	
+
 	local Hacks = Tab:AddSection({
 		Name = "Hacks"
 	})
-	
+
 	local Settings = Window:MakeTab({
 		Name = "Settings",
 		Icon = "rbxassetid://4483345998",
@@ -34,7 +36,7 @@ if game.PlaceId == 11242465380 then
 			SaveSpeedBoolean = Value
 		end    
 	})
-	
+
 	Hacks:AddDropdown({
 		Name = "Teleport to morph",
 		Default = "Default",
@@ -42,7 +44,7 @@ if game.PlaceId == 11242465380 then
 		Callback = function(Value)
 			if Value == "Default" then
 			else
-				game.Players.LocalPlayer.Character:MoveTo(game.workspace.Monsters[Value].Position)
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Monsters[Value].CFrame
 				OrionLib:MakeNotification({
 					Name = "Teleported to "..Value.."!",
 					Content = "By DylanIsAKing#2402",
@@ -52,7 +54,7 @@ if game.PlaceId == 11242465380 then
 			end
 		end    
 	})
-	
+
 	Hacks:AddSlider({
 		Name = "Walk Speed",
 		Flag = "WalkSpeed",
@@ -67,7 +69,7 @@ if game.PlaceId == 11242465380 then
 			Speed.WalkSpeed = Value
 		end    
 	})
-	
+
 	Hacks:AddButton({
 		Name = "Default Speed",
 		Callback = function()
@@ -75,7 +77,7 @@ if game.PlaceId == 11242465380 then
 			OrionLib["Walk Speed"]:Set(16)
 		end    
 	})
-	
+
 	local Credits = Window:MakeTab({
 		Name = "Credits",
 		Icon = "rbxassetid://4483345998",
