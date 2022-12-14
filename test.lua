@@ -21,16 +21,16 @@ local OrionLib = {
 			Text = Color3.fromRGB(240, 240, 240),
 			TextDark = Color3.fromRGB(150, 150, 150)
 		},
-		RGB = {
-			Main = Color3.fromRGB(0,0,90),
-			Second = Color3.fromRGB(32, 32, 32),
-			Stroke = Color3.fromRGB(60, 60, 60),
-			Divider = Color3.fromRGB(60, 60, 60),
-			Text = Color3.fromRGB(240, 240, 240),
-			TextDark = Color3.fromRGB(150, 150, 150)
+		White = {
+			Main = Color3.fromRGB(250,250,250),
+			Second = Color3.fromRGB(240,240,240),
+			Stroke = Color3.fromRGB(232,232,232),
+			Divider = Color3.fromRGB(181,181,181),
+			Text = Color3.fromRGB(23,23,23),
+			TextDark = Color3.fromRGB(243,243,243)
 		},
 	},
-	SelectedTheme = "RGB",
+	SelectedTheme = "White",
 	Folder = nil,
 	SaveCfg = false
 }
