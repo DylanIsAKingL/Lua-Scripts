@@ -36,6 +36,18 @@ if game.PlaceId == 11242465380 then
 			SaveSpeedBoolean = Value
 		end    
 	})
+	
+	local TPAnchor
+	
+	Config:AddToggle({
+		Name = "Anchor when teleported (helps if you fall under)",
+		Default = false,
+		Save = true,
+		Flag = "TPAnchor",
+		Callback = function(Value)
+			TPAnchor = Value
+		end    
+	})
 
 	Hacks:AddDropdown({
 		Name = "Teleport to morph",
@@ -44,7 +56,14 @@ if game.PlaceId == 11242465380 then
 		Callback = function(Value)
 			if Value == "Default" then
 			else
-				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Monsters[Value].CFrame
+				if TPAnchor == true then
+					game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Monsters[Value].CFrame
+					wait(2)
+					game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+				else
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Monsters[Value].CFrame
+				end
 				OrionLib:MakeNotification({
 					Name = "Teleported to "..Value.."!",
 					Content = "By DylanIsAKing#2402",
@@ -96,6 +115,5 @@ else
 		Time = 5
 	})
 end
---game.Players.LocalPlayer.Character:MoveTo(game.workspace.Monsters["Rainbow Eyes"].Position)
 
 OrionLib:Init()
