@@ -10,12 +10,6 @@ UIS.InputBegan:Connect(function(input)
 	end
 end)
 
-UIS.InputBegan:Connect(function(input, plr)
-	if input.KeyCode == Enum.KeyCode.K then
-		plr:Kick("Please check your internet connection and try again. (Error Code: 277)")
-	end
-end)
-
 while toggled do
 	task.wait(math.random(0.5,1.4))
 	game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
