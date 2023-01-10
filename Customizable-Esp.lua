@@ -17,6 +17,7 @@ local EspOutlineTransparency
 local EspColor
 local EspOutlineColor
 local EspTeam = "All"
+local EspToggled = false
 
 EspTab:AddToggle({
 	Name = "Esp Toggle",
@@ -32,6 +33,7 @@ EspTab:AddToggle({
 				})
 			else
 				if Value then
+					EspToggled = true
 					OrionLib:MakeNotification({
 						Name = "Esp Enabled!",
 						Content = "By DylanIsAKing#2402",
@@ -50,6 +52,7 @@ EspTab:AddToggle({
 						end
 					end
 				else
+					EspToggled = false
 					OrionLib:MakeNotification({
 						Name = "Esp Disabled!",
 						Content = "By DylanIsAKing#2402",
@@ -73,6 +76,7 @@ EspTab:AddToggle({
 				})
 			else
 				if Value then
+					EspToggled = true
 					OrionLib:MakeNotification({
 						Name = "Esp Enabled!",
 						Content = "By DylanIsAKing#2402",
@@ -111,6 +115,7 @@ EspTab:AddToggle({
 						end
 					end
 				else
+					EspToggled = false
 					OrionLib:MakeNotification({
 						Name = "Esp Disabled!",
 						Content = "By DylanIsAKing#2402",
@@ -135,6 +140,43 @@ if game.PlaceId == 606849621 then
 		Options = {"All", "Police", "Criminals"},
 		Callback = function(Value)
 			EspTeam = Value
+			
+			if EspToggled then
+				for i, v in pairs(game:FindFirstChildOfClass("Players"):GetChildren()) do
+					v.Character.esp:Destroy()
+				end
+				for i, v in pairs(game:GetChildren()) do
+					if v:IsA("Players") then
+						for i, v in pairs(v:GetChildren()) do
+							if EspTeam == "Police" and v.TeamValue.Value == "Police" and v.Name ~= game.Players.LocalPlayer.Name then
+								local highlight = Instance.new("Highlight")
+								highlight.Parent = v.Character
+								highlight.Name = "esp"
+								highlight.FillTransparency = EspTransparency
+								highlight.OutlineTransparency = EspOutlineTransparency
+								highlight.FillColor = EspColor
+								highlight.OutlineColor = EspOutlineColor
+							elseif EspTeam == "Criminals" and v.TeamValue.Value == "Prisoner" and v.Name ~= game.Players.LocalPlayer.Name then
+								local highlight = Instance.new("Highlight")
+								highlight.Parent = v.Character
+								highlight.Name = "esp"
+								highlight.FillTransparency = EspTransparency
+								highlight.OutlineTransparency = EspOutlineTransparency
+								highlight.FillColor = EspColor
+								highlight.OutlineColor = EspOutlineColor
+							elseif EspTeam == "All" and v.Name ~= game.Players.LocalPlayer.Name then
+								local highlight = Instance.new("Highlight")
+								highlight.Parent = v.Character
+								highlight.Name = "esp"
+								highlight.FillTransparency = EspTransparency
+								highlight.OutlineTransparency = EspOutlineTransparency
+								highlight.FillColor = EspColor
+								highlight.OutlineColor = EspOutlineColor
+							end
+						end
+					end
+				end
+			end
 		end
 	})
 end
@@ -216,16 +258,25 @@ local OtherEsp = EspTab:AddSection({
 OtherEsp:AddButton({
 	Name = "Refresh (for new players)",
 	Callback = function()
-		for i, v in pairs(game.Players:GetChildren()) do
-			if not v.Character:FindFirstChild("esp") and v.Name ~= game.Players.LocalPlayer.Name then
-				local highlight = Instance.new("Highlight")
-				highlight.Parent = v.Character
-				highlight.Name = "esp"
-				highlight.FillTransparency = EspTransparency
-				highlight.OutlineTransparency = EspOutlineTransparency
-				highlight.FillColor = EspColor
-				highlight.OutlineColor = EspOutlineColor
+		if EspToggled then
+			for i, v in pairs(game:FindFirstChildOfClass("Players"):GetChildren()) do
+				if not v.Character:FindFirstChild("esp") and v.Name ~= game:FindFirstChildOfClass("Players").LocalPlayer.Name then
+					local highlight = Instance.new("Highlight")
+					highlight.Parent = v.Character
+					highlight.Name = "esp"
+					highlight.FillTransparency = EspTransparency
+					highlight.OutlineTransparency = EspOutlineTransparency
+					highlight.FillColor = EspColor
+					highlight.OutlineColor = EspOutlineColor
+				end
 			end
+		else
+			OrionLib:MakeNotification({
+				Name = "Esp Not Toggled!",
+				Content = "By DylanIsAKing#2402",
+				Image = "rbxassetid://4483345998",
+				Time = 5
+			})
 		end
 	end    
 })
