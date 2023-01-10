@@ -22,7 +22,7 @@ EspTab:AddToggle({
 		if #game.Players:GetChildren() > 31 then
 			OrionLib:MakeNotification({
 				Name = "Too many players",
-				Content = "There are "..#game.Players:GetChildren().."Players in the server, maximum is 31",
+				Content = "There are "..#game.Players:GetChildren().." Players in the server, maximum is 31",
 				Image = "rbxassetid://4483345998",
 				Time = 5
 			})
