@@ -1,3 +1,5 @@
+-- By DylanIsAKing#2402 :)
+
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 local Window = OrionLib:MakeWindow({Name = "King's Universal Esp 📌", IntroText = "King's Universal Esp 📌", HidePremium = false, SaveConfig = true, ConfigFolder = "KingsEsp"})
@@ -14,41 +16,104 @@ local EspTransparency
 local EspOutlineTransparency
 local EspColor
 local EspOutlineColor
+local EspTeam = "All"
 
 EspTab:AddToggle({
 	Name = "Esp Toggle",
 	Default = false,
 	Callback = function(Value)
-		if #game.Players:GetChildren() > 31 then
-			OrionLib:MakeNotification({
-				Name = "Too many players",
-				Content = "There are "..#game.Players:GetChildren().." Players in the server, maximum is 31",
-				Image = "rbxassetid://4483345998",
-				Time = 5
-			})
-		else
-			if Value then
-				for i, v in pairs(game.Players:GetChildren()) do
-					if v.Name ~= game.Players.LocalPlayer.Name then
-						local highlight = Instance.new("Highlight")
-						highlight.Parent = v.Character
-						highlight.Name = "esp"
-						highlight.FillTransparency = EspTransparency
-						highlight.OutlineTransparency = EspOutlineTransparency
-						highlight.FillColor = EspColor
-						highlight.OutlineColor = EspOutlineColor
+		if game.PlaceId ~= 606849621 then
+			if #game.Players:GetChildren() > 31 then
+				OrionLib:MakeNotification({
+					Name = "Too many players",
+					Content = "There are "..#game.Players:GetChildren().." Players in the server, maximum is 31",
+					Image = "rbxassetid://4483345998",
+					Time = 5
+				})
+			else
+				if Value then
+					for i, v in pairs(game.Players:GetChildren()) do
+						if v.Name ~= game.Players.LocalPlayer.Name then
+							local highlight = Instance.new("Highlight")
+							highlight.Parent = v.Character
+							highlight.Name = "esp"
+							highlight.FillTransparency = EspTransparency
+							highlight.OutlineTransparency = EspOutlineTransparency
+							highlight.FillColor = EspColor
+							highlight.OutlineColor = EspOutlineColor
+						end
+					end
+				else
+					for i, v in pairs(game.Players:GetChildren()) do
+						if v.Character:FindFirstChild("esp") then
+							v.Character:FindFirstChildOfClass("Highlight"):Destroy()
+						end
 					end
 				end
+			end
+		else
+			if #game.Players:GetChildren() > 31 then
+				OrionLib:MakeNotification({
+					Name = "Too many players",
+					Content = "There are "..#game.Players:GetChildren().." Players in the server, maximum is 31",
+					Image = "rbxassetid://4483345998",
+					Time = 5
+				})
 			else
-				for i, v in pairs(game.Players:GetChildren()) do
-					if v.Character:FindFirstChild("esp") then
-						v.Character:FindFirstChildOfClass("Highlight"):Destroy()
+				if Value then
+					for i, v in pairs(game:GetChildren()) do
+						if v:IsA("Players") then
+							for i, v in pairs(v:GetChildren()) do
+								if EspTeam == "Police" and v.TeamValue.Value == "Police" and v.Name ~= game.Players.LocalPlayer.Name then
+									local highlight = Instance.new("Highlight")
+									highlight.Parent = v.Character
+									highlight.Name = "esp"
+									highlight.FillTransparency = EspTransparency
+									highlight.OutlineTransparency = EspOutlineTransparency
+									highlight.FillColor = EspColor
+									highlight.OutlineColor = EspOutlineColor
+								elseif EspTeam == "Criminals" and v.TeamValue.Value == "Prisoner" and v.Name ~= game.Players.LocalPlayer.Name then
+									local highlight = Instance.new("Highlight")
+									highlight.Parent = v.Character
+									highlight.Name = "esp"
+									highlight.FillTransparency = EspTransparency
+									highlight.OutlineTransparency = EspOutlineTransparency
+									highlight.FillColor = EspColor
+									highlight.OutlineColor = EspOutlineColor
+								elseif EspTeam == "All" and v.Name ~= game.Players.LocalPlayer.Name then
+									local highlight = Instance.new("Highlight")
+									highlight.Parent = v.Character
+									highlight.Name = "esp"
+									highlight.FillTransparency = EspTransparency
+									highlight.OutlineTransparency = EspOutlineTransparency
+									highlight.FillColor = EspColor
+									highlight.OutlineColor = EspOutlineColor
+								end
+							end
+						end
+					end
+				else
+					for i, v in pairs(game.Players:GetChildren()) do
+						if v.Character:FindFirstChild("esp") then
+							v.Character:FindFirstChildOfClass("Highlight"):Destroy()
+						end
 					end
 				end
 			end
 		end
 	end    
 })
+
+if game.PlaceId == 606849621 then
+	EspTab:AddDropdown({
+		Name = "Esp Team",
+		Default = "All",
+		Options = {"All", "Police", "Criminals"},
+		Callback = function(Value)
+			EspTeam = Value
+		end
+	})
+end
 
 local EspColorTab = EspTab:AddSection({
 	Name = "Color"
