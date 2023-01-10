@@ -32,6 +32,12 @@ EspTab:AddToggle({
 				})
 			else
 				if Value then
+					OrionLib:MakeNotification({
+						Name = "Esp Enabled!",
+						Content = "By DylanIsAKing#2402",
+						Image = "rbxassetid://4483345998",
+						Time = 5
+					})
 					for i, v in pairs(game.Players:GetChildren()) do
 						if v.Name ~= game.Players.LocalPlayer.Name then
 							local highlight = Instance.new("Highlight")
@@ -44,6 +50,12 @@ EspTab:AddToggle({
 						end
 					end
 				else
+					OrionLib:MakeNotification({
+						Name = "Esp Disabled!",
+						Content = "By DylanIsAKing#2402",
+						Image = "rbxassetid://4483345998",
+						Time = 5
+					})
 					for i, v in pairs(game.Players:GetChildren()) do
 						if v.Character:FindFirstChild("esp") then
 							v.Character:FindFirstChildOfClass("Highlight"):Destroy()
@@ -61,6 +73,12 @@ EspTab:AddToggle({
 				})
 			else
 				if Value then
+					OrionLib:MakeNotification({
+						Name = "Esp Enabled!",
+						Content = "By DylanIsAKing#2402",
+						Image = "rbxassetid://4483345998",
+						Time = 5
+					})
 					for i, v in pairs(game:GetChildren()) do
 						if v:IsA("Players") then
 							for i, v in pairs(v:GetChildren()) do
@@ -93,6 +111,12 @@ EspTab:AddToggle({
 						end
 					end
 				else
+					OrionLib:MakeNotification({
+						Name = "Esp Disabled!",
+						Content = "By DylanIsAKing#2402",
+						Image = "rbxassetid://4483345998",
+						Time = 5
+					})
 					for i, v in pairs(game.Players:GetChildren()) do
 						if v.Character:FindFirstChild("esp") then
 							v.Character:FindFirstChildOfClass("Highlight"):Destroy()
